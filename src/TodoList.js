@@ -1,82 +1,32 @@
-import React,{Component,Fragment} from 'react'
-import './style.css'
-import TodoItem from './Todoitem'
+import React,{Component} from 'react'
+import 'antd/dist/antd.css'
+import { Input ,Button,List} from 'antd'
+import store from './store/index.js'
+
 
 class TodoList extends Component {
-
-constructor(props){
-    super(props);
-    this.state = {
-        inputValue:'hello!!',
-        list:[]
+    constructor(props){
+        super(props);
+        this.state = store.getState()
     }
-    this.handleInputChange = this.handleInputChange.bind(this)
-    this.handleBtnClick=this.handleBtnClick.bind(this)
-    this.handleItemDelete=this.handleItemDelete.bind(this)
+render (){
+  return  (
+  <div>
+      <div>
+      <Input value = {this.state.inputValue}placeholder='input info' />
+      <Button type="primary">提交</Button>
+      </div>
+      <List
+      bordered
+      dataSource={this.state.list}
+      renderItem={item => (
+        <List.Item>
+          {item}
+        </List.Item>
+      )}
+    />
+    </div>)
 }
-   render(){
-        return(
-            <Fragment>
-            
-                <div>
-                    <label htmlFor='insertArea'>输入内容</label>
-                <input 
-                id='insertArea'
-                className='input'
-                value={this.state.inputValue}
-                onChange = {this.handleInputChange}
-                />
-                <button onClick={this.handleBtnClick}>提交</button></div>
-            <ul>
-             {this.getTodoItem()}
-            </ul>
-            </Fragment>
-        )
-    }
-    getTodoItem(){
-      return this.state.list.map((item,index)=>{
-    return (  
-    <TodoItem 
-    key={index}
-    content={item} 
-    index={index}
-    deleteItem={this.handleItemDelete}/>
-    // <li key={index}
-    //  onClick={this.handleItemDelete.bind(this,index)}
-    //  dangerouslySetInnerHTML ={{__html:item}}
-    //  ></li>
-    
-    )
-           
-        })
-    }
-    handleInputChange(e){
-        const value = e.target.value
-    this.setState(()=>({
-        inputValue: value
-    }))
-    }
-    handleBtnClick(e){
-        this.setState((prevState)=>({
-            list:[...prevState.list,prevState.inputValue],
-            inputValue:""
-        }))
-
-    }
-    handleItemDelete(index){
-        
-        this.setState((prevState)=>{
-            const list = [...prevState.list];
-            list.splice(index,1);
-            return {
-                list
-            }
-        })
-       
-    }
-
 }
-
-
 
 export default TodoList
