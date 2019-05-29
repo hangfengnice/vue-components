@@ -1,58 +1,100 @@
 import React,{Component} from 'react'
-import 'antd/dist/antd.css'
-// import {BtnClick,InputValue,delete_todo_item} from './store/actionTypes'
-import store from './store/index.js'
-import {initListAction,gethandleBtnClick,gethandleInputValue,gethandleItemClickDelete} from './store/actionCreators'
-import ToDoListUI from './store/ToDoListUI'
-import axios from 'axios'
-
+import store from './store/index'
+import UI from './store/ui'
 import './mock/mock'
+import axios from 'axios'
+import {connect } from 'react-redux'
 
-class TodoList extends Component {
-    constructor(props){
-        super(props);
-        this.state = store.getState()
-       store.subscribe(this.handleChange.bind(this))
-       this.handleItemClickDelete = this.handleItemClickDelete.bind(this)
+
+class TodoList extends Component{
+   
+    render(){
+        const {value,list,handlechange,handlestore,handlebtn,handledelete} = this.props
+        return <UI
+
+        value = {value}
+        list = {list}
+        handlechange ={handlechange}
+        handlestore ={handlestore} 
+        handlebtn={handlebtn}
+        handledelete={handledelete}
+
+        />
     }
-render (){
-  return (
-  <ToDoListUI 
-  list={this.state.list}
-  inputValue={this.state.inputValue}
-  handleInputValue={this.handleInputValue}
-  handleBtnClick={this.handleBtnClick}
-  handleItemClickDelete = {this.handleItemClickDelete}
-  />
-  )
+    componentDidMount(){
+        axios.get('/data').then(res => {
+            const action={
+                type: 'initlist',
+                data:res.data
+            }
+            store.dispatch(action)
+        })
+    }
+    // handlestore(){
+    //     this.setState(store.getState())
+    // }
+//    handlechange(e){
+// const action ={
+//     type:'inputvalue',
+//     value : e.target.value
+// }
+// store.dispatch(action)
+//    }
+//    handlebtn(){
+//        const action ={
+//            type:'addlist'
+//        }
+//        store.dispatch(action)
+//    }
+//    handledelete(index){
+//        const action = {
+//            type:"listdelete",
+//            index
+//        }
+//        store.dispatch(action)
+//    }
 }
-componentDidMount(){
-  axios.get('/data').then((res)=>{
-    const data = res.data
-  const action = initListAction(data)
-  store.dispatch(action)
-})
- 
+const test = (state)=>{
+return {
+    value: state.value,
+    list:state.list
 }
-handleBtnClick(){
-  const action = gethandleBtnClick()
-  store.dispatch(action)
 }
-handleInputValue(e){
-  const action= gethandleInputValue(e.target.value)
-  store.dispatch(action)
+const test1 = (dispatch)=>{
+return {
+    // handlestore(){
+    //     this.setState(store.getState())
+
+    // },
+    handlechange(e){
+        const action ={
+            type:'inputvalue',
+            value : e.target.value
+        }
+       dispatch(action)
+           },
+           handlebtn(){
+            const action ={
+                type:'addlist'
+            }
+            dispatch(action)
+        },
+        handledelete(index){
+            const action = {
+                type:"listdelete",
+                index
+            }
+           dispatch(action)
+        },
+        handledelete(index){
+            const action = {
+                type:"listdelete",
+                index
+            }
+           dispatch(action)
+        }
+
+}
 }
 
-handleChange(){
-  this.setState(store.getState())
-}
-handleItemClickDelete(index){
-const action=gethandleItemClickDelete(index)
-store.dispatch(action)
-}
-
-
-
-}
-
-export default TodoList
+export default connect(test,test1)(TodoList)
