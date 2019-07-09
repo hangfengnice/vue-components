@@ -12,7 +12,7 @@ npm i
 
 npm start
 
-// 再开一个终端 进入客户端
+// 再开一个终端(快捷键 control + esc键下面那个键) 进入客户端
 cd /client
 
 // 安装客户端依赖
