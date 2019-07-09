@@ -1,0 +1,25 @@
+{
+  "name": "vue-wechat",
+  "version": "1.0.0",
+  "description": "微信的模拟",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hangfengnice/vue-wechat.git"
+  },
+  "keywords": [
+    "vue",
+    "vuex",
+    "node",
+    "mongoose"
+  ],
+  "author": "航锋",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hangfengnice/vue-wechat/issues"
+  },
+  "homepage": "https://github.com/hangfengnice/vue-wechat#readme"
+}
