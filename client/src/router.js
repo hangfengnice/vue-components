@@ -7,6 +7,7 @@ import Chats from "./views/chats.vue";
 import Concats from "./views/concats.vue";
 import Discover from "./views/discover.vue";
 import Me from "./views/me.vue";
+import Moments from "./views/moments.vue";
 
 Vue.use(Router);
 
@@ -14,15 +15,15 @@ const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
-    // {
-    //   path: "",
-    //   redirect:'/chats'
-    // },
     {
       path: "/",
       name: "index",
       component: Index,
       children: [
+        {
+          path: "",
+          redirect: "/chats"
+        },
         { path: "/chats", name: "chats", component: Chats },
         { path: "/concats", name: "concats", component: Concats },
         { path: "/discover", name: "discover", component: Discover },
@@ -30,14 +31,18 @@ const router = new Router({
       ]
     },
     { path: "/register", name: "register", component: Register },
-    { path: "/login", name: "login", component: Login }
+    { path: "/login", name: "login", component: Login },
+    { path: "/moments", name: "moments", component: Moments }
   ]
 });
 
 router.beforeEach((to, from, next) => {
   const isLogin = localStorage.wxToken ? true : false;
-  if (to.path == "/login" || to.oath == "/register") next();
-  isLogin ? next() : next("/login");
+  if (to.path == "/login" || to.path == "/register") {
+    next();
+  } else {
+    isLogin ? next() : next("/login");
+  }
 });
 
 export default router;

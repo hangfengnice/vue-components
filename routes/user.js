@@ -63,7 +63,8 @@ router.post("/login", (req, res) => {
         // console.log(user._id, user.id) // 一样
         const rule = {
           id: user.id,
-          name: user.name
+          name: user.name,
+          avatar: user.avatar
         };
         jwt.sign(rule, "secret", { expiresIn: 36000 }, (err, token) => {
           if (err) throw err;

@@ -1,11 +1,18 @@
 <template>
   <div>
-    1
+    <Header title='微信' btn_icon='plus' />>
   </div>
 </template>
 
 <script>
+import Header from '../components/header'
+
 export default {
+  name: 'chats',
+  components: {
+    Header
+  }
+
 
 }
 </script>

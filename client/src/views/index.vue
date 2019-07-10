@@ -19,7 +19,7 @@ export default {
         {title: '微信', icon: 'comment', path: "/chats"},
         {title: '通讯录', icon: 'address-book', path: "/concats"},
         {title: '发现', icon: 'compass', path: "/discover"},
-        {title: '我的', icon: 'user', path: "/me"},
+        {title: '我', icon: 'user', path: "/me"},
       ]
     }
   }
