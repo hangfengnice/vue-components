@@ -5,7 +5,7 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const gravatar = require("gravatar");
 const jwt = require("jsonwebtoken");
-const passport = require('passport')
+const passport = require("passport");
 
 router.get("/", (req, res) => {
   res.json({
@@ -79,11 +79,15 @@ router.post("/login", (req, res) => {
   });
 });
 
-// 
+//
 
-router.get('/current',passport.authenticate('jwt',{session: false}) ,(req, res)=>{
-// console.log()
-res.json(req.user)
-})
+router.get(
+  "/current",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    // console.log()
+    res.json(req.user);
+  }
+);
 
 module.exports = router;

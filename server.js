@@ -1,8 +1,9 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const user = require('./routes/user')
-const bodyParser = require('body-parser')
-const passport = require('passport')
+const user = require("./routes/user");
+const profile = require("./routes/profile");
+const bodyParser = require("body-parser");
+const passport = require("passport");
 
 mongoose
   .connect("mongodb://localhost:27017/wechat", { useNewUrlParser: true })
@@ -12,15 +13,15 @@ mongoose
 const app = express();
 
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 //passport 初始化
-app.use(passport.initialize())
-require('./config/passport')(passport)
+app.use(passport.initialize());
+require("./config/passport")(passport);
 
-
-app.use(user)
+app.use(user);
+app.use("/profile", profile);
 
 app.listen(5000, () => console.log("Server is running on port 5000 @ @"));
