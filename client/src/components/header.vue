@@ -1,24 +1,26 @@
 <template>
-  <header class="header">
-    <div v-show="isLeft" class="header-button is-left">
-      <i class="fa fa-chevron-left"></i>
-      <button @click="$router.go(-1)">返回</button>
-    </div>
-    <h1 class="header-title">{{title}}</h1>
-    <div v-show="btn_icon" class="header-button is-right">
-      <button @click="$emit('rightClick')">
-        <i :class="'fa fa-' + btn_icon"></i>
-      </button>
-    </div>
-  </header>
+    <header class="header">
+        <div class="header-button is-left" v-show="isLeft">
+            <i class="fa fa-chevron-left"></i>
+            <button @click="$router.go(-1)">返回</button>
+        </div>
+        <h1 class="header-title">{{title}}</h1>
+        <div class="header-button is-right" v-show="btn_icon">
+            <button @click="$emit('rightClick')"><i :class="'fa fa-'+ btn_icon"></i></button>
+        </div>
+    </header>
 </template>
 
 <script>
 export default {
-  name: "headerTop",
+  name: "Hader",
   props: {
     title: String,
     isLeft: {
+      type: Boolean,
+      default: false
+    },
+    isRight: {
       type: Boolean,
       default: false
     },

@@ -1,8 +1,7 @@
 <template>
     <div class="img_wrap">
-      <div v-if="showfileData.length > 0" >
-        <div class="isImg" 
-            
+      <div class="isImg" 
+            v-if="showfileData.length > 0"
             v-for="(file_img, index) in showfileData" 
             :key="index">
             <img :src="file_img" alt="">
@@ -11,7 +10,6 @@
                 class="remove" 
                 @click='removeImg(file_img)'>x</button>
         </div>
-      </div>
         <div class="isImg img_upload" v-if="showfileData.length < 9">
             <button class="btn_upload">
                 <input 

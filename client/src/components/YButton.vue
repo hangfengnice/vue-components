@@ -1,27 +1,22 @@
 <template>
-  <button
-    class="y-button"
-    :class="{'is-disabled': disabled}"
-    :type="type"
-    :disabled="disabled"
-    @click="$emit('click')"
-  >
-    <slot></slot>
-  </button>
+    <button
+        class="y-button"
+        :class="{'is-disabled':disabled}"
+        :type="type"
+        :disabled="disabled"
+        @click="$emit('click')"
+    ><slot></slot></button>
 </template>
 
 <script>
 export default {
-  name: "YButton",
+  name: "ybutton",
   props: {
     type: String,
     disabled: {
       type: Boolean,
       default: false
     }
-  },
-  data() {
-    return {};
   }
 };
 </script>
@@ -43,7 +38,9 @@ export default {
   border-radius: 4px;
   width: 100%;
 }
-.is-disabled {
+.is-disabled,
+.is-disabled:focus,
+.is-disabled:hover {
   color: #fff;
   background-color: #75b56c;
   border-color: #75b56c;
@@ -51,3 +48,4 @@ export default {
   pointer-events: none;
 }
 </style>
+

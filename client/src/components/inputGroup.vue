@@ -1,19 +1,18 @@
 <template>
-  <div class="input_group">
-    <label :for="name">{{label}}</label>
-    <input
-      :value="value"
-      :placeholder="placeholder"
-      :name="name"
-      @input="$emit('input',$event.target.value)"
-      :type="type"
-    />
-  </div>
+    <div class="input_group">
+        <label :for="name">{{label}}</label>
+        <input 
+          :type="type"
+          :value="value"
+          :placeholder="placeholder"
+          :name='name'
+          @input="$emit('input', $event.target.value)" />
+    </div>
 </template>
 
 <script>
 export default {
-  name: "inputGroup",
+  name: "input_group",
   props: {
     type: {
       type: String,
@@ -39,20 +38,13 @@ export default {
 .input_group label {
   display: inline-block;
   width: 30%;
-  padding-left: 20px;
   font-size: 16px;
-  box-sizing: border-box;
 }
 .input_group input {
   display: inline-block;
   width: 65%;
   font-size: 16px;
   border: none;
-  outline: noen;
-  box-sizing: border-box;
-  padding-left: 5px;
-
-
-
+  outline: none;
 }
 </style>

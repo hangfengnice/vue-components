@@ -17,9 +17,9 @@
 </template>
 
 <script>
-import Upload from "../components/upload.vue";
+import Upload from "../components/Upload";
 import jwt_decode from "jwt-decode";
-import Loading from "../components/loading.vue";
+import Loading from "../components/Loading";
 
 export default {
   name: "publish",

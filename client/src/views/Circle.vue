@@ -10,8 +10,8 @@
             <!-- <div class="scroll-wrap"> -->
             <Scroll
               ref="pullrefresh"
-
->
+              @pulldown="loadData"
+              @pullup="loadMore">
                 <div class="head_wrapper">
                     <div class="user_head">
                         <span>{{user.name}}</span>
@@ -20,9 +20,12 @@
                         </div>
                     </div>
                 </div>
-                
                 <div class="content_wrapper">
-                    
+                    <Cell 
+                        v-for="(cricle, index) in cricleList"
+                        :key="index"
+                        :cricleObj='cricle'
+                    ></Cell> 
                 </div>
             </Scroll>
             <!-- </div> -->
@@ -31,10 +34,10 @@
 </template>
 
 <script>
-import Header from "../components/header";
+import Header from "../components/Header";
 import jwt_decode from "jwt-decode";
-import Cell from "../components/cellView";
-import Scroll from "../components/scroll";
+import Cell from "../components/Cell2";
+import Scroll from "../components/Scroll";
 
 export default {
   name: "fcircle",
@@ -67,10 +70,9 @@ export default {
       if (this.loading) return;
       this.loading = true;
       this.$axios("/api/profile/latest").then(res => {
-        console.log(res.data)
         this.loading = false;
         this.cricleList = [...res.data];
-        // this.$refs.pullrefresh.$emit("pullrefresh.finishLoad");
+        this.$refs.pullrefresh.$emit("pullrefresh.finishLoad");
       });
     },
     loadData() {

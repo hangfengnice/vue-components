@@ -1,36 +1,28 @@
 {
-  "name": "vue-wechat",
+  "name": "app",
   "version": "1.0.0",
-  "description": "微信的模拟",
+  "description": "restful api",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "client-install": "npm install --prefix client",
+    "client": "npm start --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hangfengnice/vue-wechat.git"
-  },
-  "keywords": [
-    "vue",
-    "vuex",
-    "node",
-    "mongoose"
-  ],
-  "author": "航锋",
+  "author": "hangfeng",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/hangfengnice/vue-wechat/issues"
-  },
-  "homepage": "https://github.com/hangfengnice/vue-wechat#readme",
   "dependencies": {
-    "bcrypt": "^3.0.6",
-    "body-parser": "^1.19.0",
-    "express": "^4.17.1",
-    "gravatar": "^1.8.0",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.6.4",
+    "bcrypt": "^2.0.1",
+    "body-parser": "^1.18.3",
+    "concurrently": "^3.6.0",
+    "express": "^4.16.3",
+    "gravatar": "^1.6.0",
+    "jsonwebtoken": "^8.2.1",
+    "mongoose": "^5.1.0",
     "passport": "^0.4.0",
-    "passport-jwt": "^4.0.0"
+    "passport-jwt": "^4.0.0",
+    "validator": "^10.2.0"
   }
 }

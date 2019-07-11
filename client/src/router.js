@@ -1,44 +1,52 @@
-import Vue from "vue";
-import Router from "vue-router";
-import Index from "./views/index.vue";
-import Login from "./views/login.vue";
-import Register from "./views/register.vue";
-import Chats from "./views/chats.vue";
-import Concats from "./views/concats.vue";
-import Discover from "./views/discover.vue";
-import Me from "./views/me.vue";
-import Moments from "./views/moments.vue";
-import Publish from './views/publish.vue'
+import Vue from 'vue'
+import Router from 'vue-router'
+import Index from './views/Index.vue'
 
-Vue.use(Router);
+Vue.use(Router)
 
 const router = new Router({
-  mode: "history",
+  mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
-      path: "/",
-      name: "index",
+      path: '/',
+      name: 'index',
       component: Index,
       children: [
         {
-          path: "",
-          redirect: "/chats"
+          path: '',
+          redirect: '/wchart'
         },
-        { path: "/chats", name: "chats", component: Chats },
-        { path: "/concats", name: "concats", component: Concats },
-        { path: "/discover", name: "discover", component: Discover },
-        { path: "/me", name: "me", component: Me }
+        {
+          path: '/wchart',
+          name: 'wchart',
+          component: () => import('./views/Wchart.vue')
+        },
+        {
+          path: '/abook',
+          name: 'abook',
+          component: () => import('./views/AddressBook.vue')
+        },
+        {
+          path: '/find',
+          name: 'find',
+          component: () => import('./views/Find.vue')
+        },
+        {
+          path: '/mine',
+          name: 'mine',
+          component: () => import('./views/Mine.vue')
+        }
       ]
     },
-    { path: "/register", name: "register", component: Register },
-    { path: "/login", name: "login", component: Login },
-    { path: "/moments", name: "moments", component: Moments },
-    { path: "/publish", name: "publish", component: Publish },
-
+    { path: '/login', name: 'login', component: () => import('./views/Login.vue') },
+    { path: '/register', name: 'register', component: () => import('./views/Register.vue') },
+    { path: '/circle', name: 'circle', component: () => import('./views/Circle.vue') },
+    { path: '/publish', name: 'publish', component: () => import('./views/Publish.vue') }
   ]
-});
+})
 
+// 添加路由守卫
 router.beforeEach((to, from, next) => {
   const isLogin = localStorage.wxToken ? true : false;
   if (to.path == "/login" || to.path == "/register") {
@@ -46,6 +54,6 @@ router.beforeEach((to, from, next) => {
   } else {
     isLogin ? next() : next("/login");
   }
-});
+})
 
-export default router;
+export default router

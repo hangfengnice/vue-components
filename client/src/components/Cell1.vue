@@ -1,24 +1,24 @@
 <template>
-  <router-link :to="path">
+   <router-link :to='path'>
     <div class="cell-wrapper">
-      <div class="cell-title">
-        <img :src="getSrc" alt />
-        <span>{{title}}</span>
-      </div>
-      <div class="cell-allow-right">
-        <i class="fa fa-chevron-right"></i>
-      </div>
+        <div class="cell-title">
+            <img :src="getSrc" alt="">
+            <span>{{title}}</span>
+        </div>
+        <div class="cell-allow-right">
+            <i class="fa fa-chevron-right"></i>
+        </div>
     </div>
-  </router-link>
+   </router-link>
 </template>
 
 <script>
 export default {
   name: "cell",
   props: {
-    path: String,
     src: String,
-    title: String
+    title: String,
+    path: String
   },
   computed: {
     getSrc() {
@@ -64,3 +64,5 @@ a {
   color: inherit;
 }
 </style>
+
+

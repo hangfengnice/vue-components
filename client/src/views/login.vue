@@ -1,33 +1,40 @@
 <template>
-  <div class="login">
-    <div class="title">用户登录</div>
-    <div class="content">
-      <!-- 表单 -->
-      <form action>
-        <InputGroup label="账号" placeholder="请填写账号" v-model="user.email" />
-        <InputGroup label="密码" placeholder="请填写密码" v-model="user.password" type="password" />
-      </form>
-      <div class="btn_wrap">
-        <YButton :disabled="isDisabled" @click="loginClick">登录</YButton>
-      </div>
+    <div class="login">
+        <div class="title">用户登录</div>
+        <div class="content">
+            <!-- 表单 -->
+            <form>
+                <InputGroup
+                label='账号'
+                placeholder="请填写邮箱"
+                v-model="user.email"
+                ></InputGroup>
+                <InputGroup
+                label='密码'
+                placeholder="请填写密码"
+                v-model="user.password"
+                type='password'
+                ></InputGroup>
+            </form>
+            <div class="btn_wrap">
+                <YButton
+                   :disabled='isDisabled'
+                   @click="loginClick"
+                >登录</YButton>
+            </div>
+        </div>
+        <div class="footer_wrap">
+            |<button class="register" @click="$router.push('/register')">注册账号</button>|
+        </div>
     </div>
-    <div class="footer_wrap">
-      |
-      <button class="register" @click="$router.push('/register')">注册账号</button>|
-    </div>
-  </div>
 </template>
 
 <script>
-import InputGroup from "../components/inputGroup";
+import InputGroup from "../components/InputGroup";
 import YButton from "../components/YButton";
 
 export default {
   name: "login",
-  components: {
-    InputGroup,
-    YButton
-  },
   data() {
     return {
       user: {
@@ -36,21 +43,24 @@ export default {
       }
     };
   },
+  components: {
+    InputGroup,
+    YButton
+  },
   computed: {
     isDisabled() {
       if (this.user.email && this.user.password) return false;
-      return true;
+      else return true;
     }
   },
   methods: {
-      // 验证
-      loginClick() {
+    loginClick() {
       var reg = /^([a-zA-Z0-9._-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
       if (!reg.test(this.user.email)) {
-        console.log("请输入合法的邮箱地址！");
+        alert("请输入合法的邮箱地址！");
         return;
       }
-      this.$axios.post("/api/login", this.user).then(res => {
+      this.$axios.post("/api/users/login", this.user).then(res => {
         // 登录成功
         const { token } = res.data;
         localStorage.setItem("wxToken", token);
@@ -59,12 +69,12 @@ export default {
         this.$router.push("/");
       });
     }
-    }
-  
+  }
 };
 </script>
 
-<style  scoped>
+
+<style scoped>
 .login {
   width: 100%;
   height: 100%;
@@ -77,7 +87,6 @@ export default {
   font-size: 22px;
   text-align: center;
 }
-
 .footer_wrap {
   position: absolute;
   left: 0;

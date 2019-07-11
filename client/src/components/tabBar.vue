@@ -1,18 +1,23 @@
 <template>
-  <div class="tabbar">
-    <router-link
-     v-for="(item, index) of data" :key="index" :to="item.path" class="tab-item">
-      <div class="tab-item-icon">
-        <i :class="'fa fa-'+item.icon "></i>
-      </div>
-      <div class="tab-item-label">{{item.title}}</div>
-    </router-link>
-  </div>
+    <div class="tabbar">
+        <router-link class="tab-item" 
+            v-for="(item, index) in data" 
+            :to='item.path'
+            :key="index"
+            active-class='is-selected'>
+            <div class="tab-item-icon">
+                <i :class="'fa fa-'+item.icon"></i>
+            </div>
+            <div class="tab-item-label">
+                {{item.title}}
+            </div>
+        </router-link>
+    </div>
 </template>
 
 <script>
 export default {
-  name: "tabBar",
+  name: "tabbar",
   props: {
     data: Array
   }
@@ -61,7 +66,9 @@ a {
   text-decoration: none;
   color: #888;
 }
-.router-link-active {
+.is-selected {
   color: #20af0e;
 }
 </style>
+
+

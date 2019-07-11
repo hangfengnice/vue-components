@@ -1,23 +1,27 @@
-# wechat
+# 微信朋友圈接口
 
-## 项目启动
+## Project setup
 
-```javascript
+```
+npm install
+```
 
-git clone git@github.com:hangfengnice/vue-wechat.git
-// 安装服务端依赖包
-npm i
+### Compiles and hot-reloads for development
 
-// 此时需要开启 mongodb  开始 服务
+```
+nodemon
+```
 
-npm start
+### 接口介绍
 
-// 再开一个终端(快捷键 control + esc键下面那个键) 进入客户端
-cd /client
+```
+http://localhost:5000/api/profile/latest  获取最新数据 上拉刷新
 
-// 安装客户端依赖
-npm i
+http://localhost:5000/api/users/login   登录获取token接口
 
-// 启动客户端
-npm start
+http://localhost:5000/api/users/register 注册接口
+
+http://localhost:5000/api/profile/page/size  下拉加载接口
+
+http://localhost:5000/api/profile/add 发布消息接口
 ```

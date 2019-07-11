@@ -1,43 +1,34 @@
 <template>
-  <div class="cell_circle">
-    <div class="img_wrapper">
-      <img :src="momentObj.img" alt="">
-
+    <div class="cell_crilce">
+        <div class="img_wrapper">
+            <img :src="cricleObj.img" alt="">
+        </div>
+        <div class="content_wrapper">
+            <div class="cell_name">
+                {{cricleObj.name}}
+            </div>
+            <div class="cell_text" v-if="cricleObj.text">
+                {{cricleObj.text}}
+            </div>
+            <div class="cell_img" v-if="cricleObj.imgs.length > 0">
+                <img v-for="(item, index) in cricleObj.imgs"
+                  :key="index"
+                 :src="item" alt="">
+            </div>
+        </div>
     </div>
-    <div class="content_wrapper">
-      <div class="cell_name">
-        {{momentObj.name}}
-      </div>
-      <div class="cell_text" v-if='momentObj.text'>
-        {{momentObj.text}}
-      </div>
-      <div class="cell_img" v-if='momentObj.imgs.length > 0'>
-
-        <img
-        v-for='(item,index) of momentObj.imgs'
-        :key='index'
-         src="" alt="">
-      </div>
-    </div>
-  </div>
 </template>
 
 <script>
 export default {
-name:"cellView",
-props: {
-  momentObj: Object
-},
-computed: {
-  getSrc(){
-    return
+  name: "cell_crilce",
+  props: {
+    cricleObj: Object
   }
-}
-}
+};
 </script>
-
 <style scoped>
-.cell_circle {
+.cell_crilce {
   width: 100%;
   box-sizing: border-box;
   padding: 16px;
