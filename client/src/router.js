@@ -8,6 +8,7 @@ import Concats from "./views/concats.vue";
 import Discover from "./views/discover.vue";
 import Me from "./views/me.vue";
 import Moments from "./views/moments.vue";
+import Publish from './views/publish.vue'
 
 Vue.use(Router);
 
@@ -32,7 +33,9 @@ const router = new Router({
     },
     { path: "/register", name: "register", component: Register },
     { path: "/login", name: "login", component: Login },
-    { path: "/moments", name: "moments", component: Moments }
+    { path: "/moments", name: "moments", component: Moments },
+    { path: "/publish", name: "publish", component: Publish },
+
   ]
 });
 
