@@ -30,12 +30,6 @@ import BScroll from "better-scroll";
 
 export default {
   name: "scroll",
-  props: {
-    probeType: {
-      type: Number,
-      default: 1
-    }
-  },
   data() {
     return {
       dragTip: {
@@ -57,7 +51,7 @@ export default {
       }
       // better-scroll的初始化
       this.scroll = new BScroll(this.$refs.wrapper, {
-        probeType: this.probeType
+        probeType: 1
       });
 
       // 派发顶部下拉事件，用于下拉刷新

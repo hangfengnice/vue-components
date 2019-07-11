@@ -10,14 +10,14 @@
 </template>
 
 <script>
-import Header from "../components/Header";
+import Header from "../components/header";
 import Cell from "../components/Cell1";
 
 export default {
-  name: "find",
+  name: "discover",
   data() {
     return {
-      cellData: { src: "pyq.jpg", title: "朋友圈", path: "/circle" }
+      cellData: { src: "pyq.jpg", title: "朋友圈", path: "/moments" }
     };
   },
   components: {

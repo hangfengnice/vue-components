@@ -15,34 +15,34 @@ const router = new Router({
       children: [
         {
           path: '',
-          redirect: '/wchart'
+          redirect: '/wechat'
         },
         {
-          path: '/wchart',
-          name: 'wchart',
-          component: () => import('./views/Wchart.vue')
+          path: '/wechat',
+          name: 'wechat',
+          component: () => import('./views/wechat.vue')
         },
         {
-          path: '/abook',
-          name: 'abook',
-          component: () => import('./views/AddressBook.vue')
+          path: '/compass',
+          name: 'compass',
+          component: () => import('./views/compass.vue')
         },
         {
-          path: '/find',
-          name: 'find',
-          component: () => import('./views/Find.vue')
+          path: '/discover',
+          name: 'discover',
+          component: () => import('./views/discover.vue')
         },
         {
-          path: '/mine',
-          name: 'mine',
-          component: () => import('./views/Mine.vue')
+          path: '/me',
+          name: 'me',
+          component: () => import('./views/me.vue')
         }
       ]
     },
-    { path: '/login', name: 'login', component: () => import('./views/Login.vue') },
-    { path: '/register', name: 'register', component: () => import('./views/Register.vue') },
-    { path: '/circle', name: 'circle', component: () => import('./views/Circle.vue') },
-    { path: '/publish', name: 'publish', component: () => import('./views/Publish.vue') }
+    { path: '/login', name: 'login', component: () => import('./views/login.vue') },
+    { path: '/register', name: 'register', component: () => import('./views/register.vue') },
+    { path: '/moments', name: 'moments', component: () => import('./views/moments.vue') },
+    { path: '/publish', name: 'publish', component: () => import('./views/publish.vue') }
   ]
 })
 

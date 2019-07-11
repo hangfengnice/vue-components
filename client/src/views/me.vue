@@ -8,10 +8,10 @@
 </template>
 
 <script>
-import Header from "../components/Header";
+import Header from "../components/header";
 
 export default {
-  name: "mine",
+  name: "me",
   components: {
     Header
   }

@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: "Hader",
+name: "Top",
   props: {
     title: String,
     isLeft: {

@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import InputGroup from "../components/InputGroup";
+import InputGroup from "../components/inputGroup";
 import YButton from "../components/YButton";
 
 export default {
@@ -60,7 +60,7 @@ export default {
         alert("请输入合法的邮箱地址！");
         return;
       }
-      this.$axios.post("/api/users/login", this.user).then(res => {
+      this.$axios.post("/api/login", this.user).then(res => {
         // 登录成功
         const { token } = res.data;
         localStorage.setItem("wxToken", token);

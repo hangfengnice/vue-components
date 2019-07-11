@@ -4,21 +4,16 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const gravatar = require('gravatar');
-const keys = require('../../config/keys');
 const passport = require('passport');
 
-const User = require('../../models/User');
+const User = require('../models/User');
 
-// $route  GET api/users/test
-// @desc   返回的请求的json数据
-// @access public
+// test
 router.get('/test', (req, res) => {
-  res.json({ msg: 'login works' });
+  res.json({ msg: 'test' });
 });
 
-// $route  POST api/users/register
-// @desc   返回的请求的json数据
-// @access public
+// register
 router.post('/register', (req, res) => {
   // 查询数据库中是否拥有邮箱
   User.findOne({ email: req.body.email }).then(user => {
@@ -54,10 +49,7 @@ router.post('/register', (req, res) => {
   });
 });
 
-// $route  POST api/users/login
-// @desc   返回token jwt passport
-// @access public
-
+// login
 router.post('/login', (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -71,7 +63,7 @@ router.post('/login', (req, res) => {
     bcrypt.compare(password, user.password).then(isMatch => {
       if (isMatch) {
         const rule = { id: user.id, name: user.name, avatar: user.avatar };
-        jwt.sign(rule, keys.secretOrKey, { expiresIn: 3600 }, (err, token) => {
+        jwt.sign(rule, 'secret', { expiresIn: 36000 }, (err, token) => {
           if (err) throw err;
           res.json({
             success: true,
@@ -85,9 +77,7 @@ router.post('/login', (req, res) => {
   });
 });
 
-// $route  GET api/users/current
-// @desc   return current user
-// @access Private
+// current
 router.get(
   '/current',
   passport.authenticate('jwt', { session: false }),

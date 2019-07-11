@@ -8,15 +8,15 @@
     "start": "npm run serve"
   },
   "dependencies": {
-    "axios": "^0.18.0",
-    "better-scroll": "^1.12.6",
+    "axios": "^0.18.1",
+    "better-scroll": "^1.15.2",
     "jwt-decode": "^2.2.0",
-    "vue": "^2.5.17",
-    "vue-router": "^3.0.1"
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.7"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "^3.0.0",
-    "@vue/cli-service": "^3.0.0",
-    "vue-template-compiler": "^2.5.17"
+    "@vue/cli-plugin-babel": "^3.9.2",
+    "@vue/cli-service": "^3.9.2",
+    "vue-template-compiler": "^2.6.10"
   }
 }

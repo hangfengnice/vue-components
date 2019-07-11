@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import InputGroup from "../components/InputGroup";
+import InputGroup from "../components/inputGroup";
 import YButton from "../components/YButton";
 
 export default {
@@ -79,16 +79,16 @@ export default {
     registerClick(event) {
       var reg = /^([a-zA-Z0-9._-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/;
       if (!reg.test(this.user.email)) {
-        alert("请输入合法的邮箱地址！");
+        console.log("请输入合法的邮箱地址！");
         return;
       }
       if (this.user.password !== this.user.password2) {
-        alert("两次密码输入不一致！");
+        console.log("两次密码输入不一致！");
         return;
       }
-      this.$axios.post("/api/users/register", this.user).then(res => {
+      this.$axios.post("/api/register", this.user).then(res => {
         // 注册成功
-        alert("注册成功");
+        console.log("注册成功");
         this.$router.push("/login");
       });
     }

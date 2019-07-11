@@ -1,18 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const Profile = require('../../models/Profiles');
+const Profile = require('../models/Profile');
 
-// $route  GET api/profile
-// @desc   获取当前登录用户的个人信息
-// @access private
+// profile
 router.get(
   '/',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     const errors = {};
     Profile.findOne({ user: req.user.id })
-      .populate('user', ['name', 'avatar'])
       .then(profile => {
         if (!profile) {
           errors.noprofile = '该用户的信息不存在~!';
@@ -25,9 +22,7 @@ router.get(
   }
 );
 
-// $route  POST api/profile/add
-// @desc   创建朋友圈信息接口
-// @access private
+// add
 router.post(
   '/add',
   passport.authenticate('jwt', { session: false }),
@@ -46,9 +41,7 @@ router.post(
   }
 );
 
-// $route  GET api/profile/:page/:size
-// @desc   上拉加载的接口
-// @access private
+//  上拉加载的接口
 router.get(
   '/:page/:size',
   passport.authenticate('jwt', { session: false }),
@@ -75,9 +68,7 @@ router.get(
   }
 );
 
-// $route  GET api/profile/latest
-// @desc   下拉刷新的接口
-// @access private
+// 下拉刷新的接口
 router.get(
   '/latest',
   passport.authenticate('jwt', { session: false }),

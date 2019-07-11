@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import Header from "../components/Header";
+import Header from "../components/header";
 import jwt_decode from "jwt-decode";
 import Cell from "../components/Cell2";
 import Scroll from "../components/Scroll";
@@ -122,7 +122,7 @@ export default {
   width: 100%;
   position: relative;
   height: 200px;
-  background: url(../assets/cricle_bg.png) no-repeat;
+  background: url(../assets/cha.jpg) no-repeat;
   background-size: 100% 100%;
 }
 .head_wrapper .user_head {

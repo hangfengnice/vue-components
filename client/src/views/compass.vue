@@ -1,18 +1,18 @@
 <template>
     <div>
         <Header 
-            title='微信'
-            btn_icon='plus'>
+            title='通讯录'
+            btn_icon='user-plus'>
         </Header>
-        微信
+        
     </div>
 </template>
 
 <script>
-import Header from "../components/Header";
+import Header from "../components/header";
 
 export default {
-  name: "wchart",
+  name: "compass",
   components: {
     Header
   }

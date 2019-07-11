@@ -55,7 +55,7 @@ export default {
       this.$axios.post("/api/profile/add", postData).then(res => {
         this.loading = false;
         // 发表成功跳转
-        this.$router.push("circle");
+        this.$router.push("/moments");
       });
     },
     getImgs(imgs) {
