@@ -38,6 +38,7 @@ export default {
   height: 50px;
   line-height: 1;
   padding: 0 10px;
+  position: relative;
   text-align: center;
   white-space: nowrap;
   position: fixed;

@@ -1,64 +1,109 @@
 <template>
-  <div class="circle">
-    <Header title="朋友圈" btn_icon="camera" :isLeft="true" />
-    <div class="container">
-      <div class="scroll-wrap">
-        <div class="head_wrapper">
-          <div class="user_head">
-            <span>{{user.name}}</span>
-            <div class="user_img">
-              <img :src="user.avatar" alt class="head_img" />
-            </div>
-          </div>
-        </div>
+    <div class="circle">
+        <Header 
+            title='朋友圈'
+            :isLeft='true'
+            btn_icon='camera'
+            @rightClick="$router.push('/publish')"
+        ></Header>
+        <div class="container">
+            <!-- <div class="scroll-wrap"> -->
+            <Scroll
+              ref="pullrefresh"
 
-        <div class="content_wrapper">
-          <CellView :momentObj="moment" v-for="(moment, index) of momentsList" :key="index" />
+>
+                <div class="head_wrapper">
+                    <div class="user_head">
+                        <span>{{user.name}}</span>
+                        <div class="user_img">
+                          <img :src="user.avatar" alt="" class="head_img">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="content_wrapper">
+                    
+                </div>
+            </Scroll>
+            <!-- </div> -->
         </div>
-      </div>
     </div>
-  </div>
 </template>
 
 <script>
 import Header from "../components/header";
 import jwt_decode from "jwt-decode";
-import CellView from "../components/cellView";
+import Cell from "../components/cellView";
+import Scroll from "../components/scroll";
 
 export default {
-  name: "moments",
+  name: "fcircle",
+  data() {
+    return {
+      cricleList: [],
+      page: 2, // 加载更多从page2开始
+      size: 3, // 每次请求3条数据
+      loading: false
+    };
+  },
   components: {
     Header,
-    CellView
+    Cell,
+    Scroll
   },
   computed: {
     user() {
       const token = localStorage.wxToken;
-      // 解析 token
+      // 解析token
       const decode = jwt_decode(token);
       return decode;
     }
   },
-  data() {
-    return {
-      momentsList: []
-    };
+  created() {
+    this.getLatestData();
   },
   methods: {
-    getLatesData() {
-      this.$axios.get("/api/profile/latest").then(res => {
-        // console.log(res.data)
-        this.momentsList = [...res.data];
-        console.log(this.momentsList);
+    getLatestData() {
+      if (this.loading) return;
+      this.loading = true;
+      this.$axios("/api/profile/latest").then(res => {
+        console.log(res.data)
+        this.loading = false;
+        this.cricleList = [...res.data];
+        // this.$refs.pullrefresh.$emit("pullrefresh.finishLoad");
+      });
+    },
+    loadData() {
+      //下拉刷新重新初始化
+      this.page = 2;
+      this.getLatestData();
+    },
+    loadMore() {
+      this.getMoreData();
+    },
+    getMoreData() {
+      if (this.loading) return;
+      // 发送axios请求
+      this.loading = true;
+      this.$axios(`/api/profile/${this.page}/${this.size}`).then(res => {
+        this.loading = false;
+        const result = [...res.data];
+        if (result.length > 0) {
+          // 拿到结果数据进行遍历 push到列表数组中，并且page+1
+          this.$refs.pullrefresh.$emit("infinitescroll.reInit");
+          result.forEach(item => {
+            this.cricleList.push(item);
+          });
+          this.page++;
+        } else {
+          // 数组为空，没有更多数据，page不再递增
+          this.$refs.pullrefresh.$emit("infinitescroll.loadedDone");
+        }
       });
     }
-  },
-  created() {
-    this.getLatesData();
   }
 };
 </script>
-
 <style scoped>
 .circle {
   width: 100%;
@@ -69,13 +114,13 @@ export default {
   width: 100%;
   height: calc(100% - 50px);
   padding-top: 50px;
-  overflow: visible;
+  overflow: auto;
 }
 .head_wrapper {
   width: 100%;
   position: relative;
   height: 200px;
-  background: url(../assets/cha.jpg) no-repeat;
+  background: url(../assets/cricle_bg.png) no-repeat;
   background-size: 100% 100%;
 }
 .head_wrapper .user_head {
@@ -106,3 +151,4 @@ export default {
   padding-top: 20px;
 }
 </style>
+
